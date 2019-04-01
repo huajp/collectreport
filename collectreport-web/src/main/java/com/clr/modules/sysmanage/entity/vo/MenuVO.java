@@ -4,6 +4,7 @@ package com.clr.modules.sysmanage.entity.vo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class MenuVO implements Serializable {
@@ -43,5 +44,7 @@ public class MenuVO implements Serializable {
 	 * 排序
 	 */
 	private Integer orderNum;
+
+	private List<?> list;
 
 }

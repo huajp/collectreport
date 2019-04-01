@@ -3,6 +3,7 @@ package com.clr.modules.sysmanage.controller;
 
 import com.clr.common.utils.R;
 import com.clr.modules.sysmanage.entity.bo.MenuBO;
+import com.clr.modules.sysmanage.entity.vo.MenuVO;
 import com.clr.modules.sysmanage.service.IUserBizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/sys/menu")
-public class MenuController {
+public class MenuController extends AbstractController{
 	@Autowired
 	private IUserBizService userBizService;
 	/**
@@ -28,22 +29,22 @@ public class MenuController {
 	public R nav(){
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("userID",1);
-		List<MenuBO> sysMenuPOS = userBizService.listMenuByCondition(params);
-		List<MenuBO> ulist = new ArrayList<>();
-		List<MenuBO> list = new ArrayList<>();
-		for (MenuBO pos:sysMenuPOS) {
-			if(pos.getParentId() == 1){
-				list.add(pos);
+		List<MenuBO> boList = userBizService.listMenuByCondition(params);
+		List<MenuVO> voList = this.convert(boList,MenuVO.class);
+		List<MenuVO> ulist = new ArrayList<>();
+		List<MenuVO> list = new ArrayList<>();
+		for (MenuVO vo:voList) {
+			if(vo.getParentId() == 1){
+				list.add(vo);
 			}
-			if(pos.getMenuId() == 1){
-				ulist.add(pos);
+			if(vo.getMenuId() == 1){
+				ulist.add(vo);
 			}
 		}
 
-		for (MenuBO po:ulist) {
-			po.setList(list);
+		for (MenuVO v:ulist) {
+			v.setList(list);
 		}
-
 
 		return R.ok().put("menuList",ulist);
 	}

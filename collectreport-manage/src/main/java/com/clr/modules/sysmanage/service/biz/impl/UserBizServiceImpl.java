@@ -4,6 +4,7 @@ package com.clr.modules.sysmanage.service.biz.impl;
 
 import com.clr.modules.sysmanage.dao.UserDao;
 import com.clr.modules.sysmanage.entity.po.UserPO;
+import com.clr.modules.sysmanage.service.biz.AbstractCommonBizService;
 import com.clr.modules.sysmanage.service.biz.IUserBizService;
 import com.clr.common.utils.Page;
 import com.clr.common.utils.Query;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 
 @Service
-public class UserBizServiceImpl implements IUserBizService {
+public class UserBizServiceImpl extends AbstractCommonBizService implements IUserBizService {
 	@Autowired
 	private UserDao userDao;
 
